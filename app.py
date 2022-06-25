@@ -77,7 +77,7 @@ def init():
     cookie = input("Enter ROBLOSECURITY: ")
     rb = RobloxAPI(cookie)
 
-    place = input("Enter Place ID: ")
+    place_id = input("Enter Place ID: ")
     
     join_game(rb, place_id)
 
