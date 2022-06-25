@@ -2,6 +2,7 @@
 
 import sys
 import requests
+import os
 
 from glob import iglob
 
@@ -61,9 +62,9 @@ def load_player(auth, place_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}")
     arg = f"roblox-player:1+launchmode:play+gameinfo:{auth}+placelauncherurl:{url}"
     
-    print(player_path())
     try:
-        Popen([ player_path(), arg ], shell=False)
+        os.system("cd C:\\Users\\admin\\AppData\\Local\\Roblox\\Versions\\version-91f017face444efd")
+        Popen([ "RobloxPlayerLauncher.exe", arg ], shell=False)
     except FileNotFoundError:
         sys.exit("Error: latest version of Roblox not found")
 
