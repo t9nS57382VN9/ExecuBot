@@ -61,6 +61,7 @@ def load_player(auth, place_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}")
     arg = f"roblox-player:1+launchmode:play+gameinfo:{auth}+placelauncherurl:{url}"
     
+    print(player_path())
     try:
         Popen([ player_path(), arg ], shell=False)
     except FileNotFoundError:
