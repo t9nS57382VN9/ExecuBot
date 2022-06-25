@@ -58,8 +58,8 @@ def player_path() -> str:
     path = expandvars("%LOCALAPPDATA%\\Roblox\\Versions")
     return next(iglob(f"{path}\\**\\RobloxPlayerLauncher.exe"))
 
-def load_player(auth, place_id, game_id):
-    url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}&gameId={game_id}")
+def load_player(auth, place_id):
+    url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}")
     arg = f"roblox-player:1+launchmode:play+gameinfo:{auth}+placelauncherurl:{url}"
     
     try:
@@ -67,9 +67,9 @@ def load_player(auth, place_id, game_id):
     except FileNotFoundError:
         sys.exit("Error: latest version of Roblox not found")
 
-def join_game(rb, place_id, game_id) -> bool:
+def join_game(rb, place_id) -> bool:
     auth = rb.game_authentication(place_id)
-    load_player(auth, place_id, game_id)
+    load_player(auth, place_id)
 
     return True
 
@@ -77,25 +77,9 @@ def init():
     cookie = input("Enter ROBLOSECURITY: ")
     rb = RobloxAPI(cookie)
 
-    user = input("Enter username: ")
-    uid = rb.username_info(user).get("Id")
-
-    if not uid:
-        sys.exit("Error: user name not found")
-
-    while True:
-        info = user_presence(rb, uid)
-
-        place_id = info["rootPlaceId"]
-        game_id = info["gameId"]
-
-        status = info["userPresenceType"]
-
-        print(f"[User: <{user}> => {Status(status).name}]")
-
-        if status == Status.PLAYING:
-            if join_game(rb, place_id, game_id):
-                break
+    place = input("Enter Place ID: ")
+    
+    join_game(rb, place_id)
 
 if __name__ == "__main__":
     try:
