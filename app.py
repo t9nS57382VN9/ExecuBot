@@ -55,8 +55,9 @@ def user_presence(rb, uid) -> dict:
     return users[0]
 
 def player_path() -> str:
-    path = expandvars("%LOCALAPPDATA%\\Roblox\\Versions")
-    return next(iglob(f"{path}\\**\\RobloxPlayerLauncher.exe"))
+    #path = expandvars("%LOCALAPPDATA%\\Roblox\\Versions")
+    #return next(iglob(f"{path}\\**\\RobloxPlayerLauncher.exe"))
+    return "%LOCALAPPDATA%\\Roblox\\Versions\\version-91f017face444efd\\RobloxPlayerLauncher.exe"
 
 def load_player(auth, place_id):
     url = quote(f"https://assetgame.roblox.com/game/PlaceLauncher.ashx?request=RequestGameJob&placeId={place_id}")
